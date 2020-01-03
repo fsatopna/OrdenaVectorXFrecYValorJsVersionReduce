@@ -1,67 +1,63 @@
 
 var arr = [5,1,5,4,3,5,5,3];
+console.log("ent: ",arr);
 
-console.log("------------------------------ Entrada");
-console.log("entrada  :", arr);
-
+// 1- Generamos un mapa de conjuntos con la clave elemento y valor frecuencia
 var mapset = [];
 mapset = arr.reduce((mapset,nro) => mapset.set(nro, 1 + (mapset.get(nro) || 0)), new Map());
 
-//console.log("------------------------------ Mapa creado por reduce");
-//console.log("arr:  ", mapset);
 
-//console.log("recorre mapa (prueba) --------------");
-//for (let [mikey, mivalue] of mapset) {     // get data sorted
-//    console.log(mikey + ' ' + mivalue);
-//}
-//console.log("fin recorremapa (prueba)-----------");
+// 2- ordenamos el mapa, asc frecuencia y asc valor
+mapset[Symbol.iterator]= function * (){
+    yield* [...this.entries()].sort((a,b) => (
+           (b[1] == a[1]) 
+              ? (b[0] == a[0]
+                  ? 0 
+                  : ((a[0] > b[0])
+                        ? 1
+                        : -1
+                    )
+                ) 
+              : ((b[1] > a[1])
+                    ? -1
+                    : 1
+                )   
+            )
+         );
+}
+//console.log(mapset);
 
-//console.log("recorre2 mapa (prueba) --------------");
-//for (let [mikey, mivalue] of mapset) {     // get data sorted
-//    console.log(mikey + ' ' + mivalue);
-//}
-//console.log("fin recorre2 mapa (prueba)----------");
-
-var arrunord = [];
-mapset.forEach((frec,num) => {
-       arrunord.push(new Frec(num,frec))
-});
-
-//console.log("------------------------------------- array objetos desordenado armado desde el mapa");
-//console.log(arrunord);
-
-
-var arrord = arrunord.sort(function(a,b){
-    return (parseInt(a.frec * 100 + a.nro) - parseInt(b.frec * 100 + b.nro))
-})
-
-//console.log("-------------------------------------- array objetos ordenado");
-//console.log(arrord)
-
+//3- Generamos el vector resultado
 var arrres = []
-for (var i = 0; i < arrord.length; i++) {
-    for(var j = 0; j < arrord[i].frec;j++)
-       arrres.push(arrord[i].nro);
+for (let [num, frec] of mapset) {     
+    for(var j = 0; j < frec;j++)
+        arrres.push(num);
 }
 
-console.log("-------------------------------------- ");
-console.log("resultado:", arrres);
 
-var arrorddes = arrunord.sort(function(a,b){
-    if (a.frec < b.frec) 
-        return 1;
-    else if (a.frec > b.frec)
-        return -1;
-    else { if (a.nro < b.nro)
-               return -1;
-            else if (a.nro > b.nro)
-                return 1;
-            else return 0;
-    }
-})
+console.log("res: ",arrres);
 
 
-function Frec(pnro, pfrec) {
-    this.nro  = pnro;
-    this.frec = pfrec;
+
+/* Otras formas de ordenar el mapa
+
+console.log("-------------------------------------- ordenando el mapset");
+// orden totalmente asc por frec y por value
+mapset[Symbol.iterator]= function * (){
+    yield* [...this.entries()].sort((a,b) => (
+         parseInt(a[1]) * 100 + a[0]) - (parseInt(b[1]) * 100 + b[0])
+         );
 }
+
+console.log(mapset);
+
+
+// orden totalmente desc por frec y por value
+mapset[Symbol.iterator]= function * (){
+    yield* [...this.entries()].sort((a,b) => (
+         parseInt(b[1]) * 100 + (100 - a[0])) - (parseInt(a[1]) * 100 + (100 - b[0]))
+         );
+}
+console.log(mapset);
+
+*/
