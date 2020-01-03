@@ -1,11 +1,9 @@
+***
 # OrdenaVectorXFrecYValorJsVersionReduce
-
-Idem a version sin reduce (proyecto anterior), solo cambia
-
-
 ***
-# Ordenar un vector por frecuencia y valor
-***
+
+Version mas compleja que la anterior.
+
 ## Problema: 
 Se tiene un vector de enteros, y se desea ordenar el mismo por la frecuencia de cada elemento y para la misma frecuencia por el valor del elemento:
 
@@ -53,7 +51,7 @@ Comprender y utilizar distintos tipos de contenedores y algoritmos para resoluci
 
 
 ## Estrategia: 
-* Ordenar el vector.           `{1,3,3,4,5, 5, 5, 5}` 
+* Generar un mapa de conjuntos con clave(elemento) y valor(frec)          `Map { 5 => 4, 1 => 1, 4 => 1, 3 => 2 }` 
 * Obtener un vector de pares {valor, frecuencia}.   `{(1,1),(3,2),(4,1),(5,4)}`
 * Ordenar el vector de pares. `{(1,1),(4,1)(3,2)(5,4)}`
 * Obtener la salida desde el vector de pares ordenado. `{1,3,3,4,5,5,5,5}`
