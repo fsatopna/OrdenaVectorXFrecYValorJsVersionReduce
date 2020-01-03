@@ -52,7 +52,7 @@ Comprender y utilizar distintos tipos de contenedores y algoritmos para resoluci
 
 ## Estrategia: 
 * Generar un mapa de conjuntos con clave(elemento) y valor(frec)          `Map { 5 => 4, 1 => 1, 4 => 1, 3 => 2 }` 
-* Obtener un vector de pares {valor, frecuencia}.   `{(1,1),(3,2),(4,1),(5,4)}`
+* Obtener un vector de pares {elemento, frecuencia}.   `                   Map { 1 => 1, 4 => 1, 3 => 2, 5 => 4 }`
 * Ordenar el vector de pares. `{(1,1),(4,1)(3,2)(5,4)}`
 * Obtener la salida desde el vector de pares ordenado. `{1,3,3,4,5,5,5,5}`
 
